@@ -29,6 +29,30 @@ public class FormularioClientes extends JFrame {
         llenarLista();
         borrar();
         actualizar();
+        //Validación sólo números
+        textDni.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                } else {
+                    validar.validameEsta(textDni.getText(), evt);
+                }
+            }
+        });
+        //Validación sólo letras
+        textNombre.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (Character.isDigit(c)) {
+                    evt.consume();
+                } else if (c<=64 || c>122 || (c>90 && c<97)) {
+                    evt.consume();
+                }
+            }
+        });
     }
 
     private static void setStringsForColumns(String dni, String nombre, String apellidos,
@@ -93,7 +117,6 @@ public class FormularioClientes extends JFrame {
                             "Exito!", JOptionPane.INFORMATION_MESSAGE);
                     llenarLista();
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     JOptionPane.showMessageDialog(null, "Error al introducir los datos",
                             "Error al insertar", JOptionPane.ERROR_MESSAGE);
                 } catch (NumberFormatException ex) {

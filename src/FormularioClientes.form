@@ -32,7 +32,9 @@
             <preferred-size width="285" height="30"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="8fc8f" class="javax.swing.JLabel" binding="apellidos">
         <constraints>
